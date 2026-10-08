@@ -1,0 +1,60 @@
+version: "3.8"
+
+services:
+  # MongoDB Database Service for Application Metadata, Aggregates & Run Logs
+  mongodb:
+    image: mongo:7.0
+    container_name: mahatraffic_mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: mahatraffic_ai
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - mahatraffic_net
+
+  # Backend FastAPI API Service (Placeholder for Phase 14 containerization)
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: mahatraffic_backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=production
+      - MONGODB_URI=mongodb://mongodb:27017
+      - MONGODB_DATABASE=mahatraffic_ai
+    depends_on:
+      - mongodb
+    networks:
+      - mahatraffic_net
+    profiles:
+      - app
+
+  # Frontend React Service (Placeholder for Phase 15 containerization)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: mahatraffic_frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - mahatraffic_net
+    profiles:
+      - app
+
+volumes:
+  mongo_data:
+    driver: local
+
+networks:
+  mahatraffic_net:
+    driver: bridge
