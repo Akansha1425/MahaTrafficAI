@@ -1,0 +1,29 @@
+[
+  {
+    "id": "DOC_MORTH_01",
+    "filename": "morth_road_safety_guidelines_2022.md",
+    "title": "MoRTH Guidelines for Road Safety & Identification of Black Spots",
+    "organization": "Ministry of Road Transport and Highways (MoRTH), Government of India",
+    "year": 2022,
+    "source_url": "https://morth.nic.in/road-accident-in-india",
+    "document_type": "Official Policy & Engineering Standard"
+  },
+  {
+    "id": "DOC_MHSP_02",
+    "filename": "maharashtra_motor_vehicles_rules_safety_summary.md",
+    "title": "Maharashtra Highway Traffic Police & Motor Vehicles Safety Regulations",
+    "organization": "Maharashtra Highway Traffic Police (HSP), Government of Maharashtra",
+    "year": 2023,
+    "source_url": "https://trafficpolice.maharashtra.gov.in/",
+    "document_type": "State Safety Protocol & Crash Mitigation Framework"
+  },
+  {
+    "id": "DOC_IRC_03",
+    "filename": "irc_sp_88_road_safety_audit_manual.md",
+    "title": "Indian Roads Congress (IRC:SP:88) Road Safety Audit Guidelines",
+    "organization": "Indian Roads Congress (IRC)",
+    "year": 2019,
+    "source_url": "https://irc.nic.in/",
+    "document_type": "National Technical Engineering Standard"
+  }
+]

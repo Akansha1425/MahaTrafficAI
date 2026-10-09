@@ -17,6 +17,7 @@ from mcp_server.tools.rag_tools import (
     search_road_safety_documents,
 )
 
+# Canonical allowlist of permitted MCP tools
 ALLOWED_TOOLS_REGISTRY = {
     "get_city_accident_statistics": get_city_accident_statistics,
     "get_monthly_accident_statistics": get_monthly_accident_statistics,

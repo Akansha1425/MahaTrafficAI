@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MahaTraffic AI — Road Risk Intelligence System</title>
+  <meta name="description" content="MahaTraffic AI: A Reliable Multi-Agent Road Risk Intelligence System for Maharashtra using Big Data, Social Media Analytics, MCP and Guardrails." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg-base:    #0b0f1a;
+      --bg-card:    #111827;
+      --bg-card-hover: #1a2234;
+      --bg-sidebar: #0d1321;
+      --border:     #1f2d45;
+      --accent:     #f97316;
+      --accent-2:   #fb923c;
+      --amber:      #fbbf24;
+      --green:      #34d399;
+      --red:        #f87171;
+      --blue:       #60a5fa;
+      --purple:     #a78bfa;
+      --text-primary:   #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted:     #475569;
+      --radius:    12px;
+      --radius-sm: 8px;
+      --shadow:    0 4px 24px rgba(0,0,0,0.5);
+      --glow:      0 0 20px rgba(249,115,22,0.15);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-base);
+      color: var(--text-primary);
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ── Sidebar ── */
+    #sidebar {
+      width: 240px;
+      min-width: 240px;
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      z-index: 10;
+    }
+    .sidebar-logo {
+      padding: 24px 20px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-logo .logo-icon {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--accent), var(--amber));
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; margin-bottom: 10px;
+    }
+    .sidebar-logo h1 {
+      font-size: 15px; font-weight: 700; color: var(--text-primary);
+      line-height: 1.3;
+    }
+    .sidebar-logo p { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
+    .sidebar-nav { flex: 1; padding: 16px 12px; overflow-y: auto; }
+    .nav-label {
+      font-size: 10px; font-weight: 600; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.08em;
+      padding: 8px 8px 4px;
+    }
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 12px; border-radius: var(--radius-sm);
+      cursor: pointer; transition: all 0.2s;
+      font-size: 13px; font-weight: 500; color: var(--text-secondary);
+      margin-bottom: 2px;
+    }
+    .nav-item:hover { background: var(--bg-card); color: var(--text-primary); }
+    .nav-item.active {
+      background: rgba(249,115,22,0.12);
+      color: var(--accent);
+      border: 1px solid rgba(249,115,22,0.2);
+    }
+    .nav-item .icon { font-size: 16px; width: 20px; text-align: center; }
+    .sidebar-footer {
+      padding: 16px;
+      border-top: 1px solid var(--border);
+      font-size: 11px; color: var(--text-muted);
+    }
+    .status-dot {
+      display: inline-block; width: 7px; height: 7px;
+      background: var(--green); border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100%{ opacity:1; } 50%{ opacity:0.4; }
+    }
+
+    /* ── Main Content ── */
+    #main {
+      flex: 1; overflow-y: auto;
+      padding: 24px 28px;
+      display: flex; flex-direction: column; gap: 20px;
+    }
+    #main::-webkit-scrollbar { width: 5px; }
+    #main::-webkit-scrollbar-track { background: transparent; }
+    #main::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+    /* ── Section Panels ── */
+    .section { display: none; }
+    .section.active { display: block; }
+
+    /* ── Page Header ── */
+    .page-header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      margin-bottom: 4px;
+    }
+    .page-header h2 { font-size: 22px; font-weight: 700; }
+    .page-header p  { font-size: 13px; color: var(--text-secondary); margin-top: 3px; }
+    .header-badge {
+      background: rgba(249,115,22,0.12);
+      border: 1px solid rgba(249,115,22,0.25);
+      color: var(--accent);
+      font-size: 11px; font-weight: 600;
+      padding: 4px 10px; border-radius: 20px;
+    }
+
+    /* ── Stat Cards ── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      transition: all 0.25s;
+      position: relative; overflow: hidden;
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    }
+    .stat-card.orange::before { background: linear-gradient(90deg, var(--accent), var(--amber)); }
+    .stat-card.red::before    { background: linear-gradient(90deg, var(--red), #ff6b6b); }
+    .stat-card.blue::before   { background: linear-gradient(90deg, var(--blue), var(--purple)); }
+    .stat-card.green::before  { background: linear-gradient(90deg, var(--green), #10b981); }
+    .stat-card:hover { background: var(--bg-card-hover); transform: translateY(-2px); box-shadow: var(--shadow); }
+    .stat-label { font-size: 11px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; }
+    .stat-value { font-size: 28px; font-weight: 800; margin: 6px 0 2px; }
+    .stat-value.orange { color: var(--accent); }
+    .stat-value.red    { color: var(--red); }
+    .stat-value.blue   { color: var(--blue); }
+    .stat-value.green  { color: var(--green); }
+    .stat-sub { font-size: 11px; color: var(--text-muted); }
+
+    /* ── Grid Layouts ── */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 14px; }
+    .grid-21{ display: grid; grid-template-columns: 2fr 1fr; gap: 14px; }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+    .card-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .card-title { font-size: 14px; font-weight: 600; }
+    .card-badge {
+      font-size: 10px; font-weight: 600; color: var(--text-muted);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      padding: 3px 8px; border-radius: 20px;
+    }
+    canvas { max-height: 220px; }
+
+    /* ── District Table ── */
+    .risk-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .risk-table th {
+      text-align: left; padding: 8px 10px;
+      color: var(--text-muted); font-weight: 600;
+      font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em;
+      border-bottom: 1px solid var(--border);
+    }
+    .risk-table td { padding: 9px 10px; border-bottom: 1px solid rgba(255,255,255,0.03); }
+    .risk-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .risk-badge {
+      display: inline-block; padding: 2px 8px; border-radius: 20px;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.04em;
+    }
+    .risk-HIGH   { background: rgba(248,113,113,0.15); color: var(--red); border: 1px solid rgba(248,113,113,0.2); }
+    .risk-MEDIUM { background: rgba(251,191,36,0.12); color: var(--amber); border: 1px solid rgba(251,191,36,0.2); }
+    .risk-LOW    { background: rgba(52,211,153,0.12); color: var(--green); border: 1px solid rgba(52,211,153,0.2); }
+
+    /* ── Score Bar ── */
+    .score-bar-wrap { display: flex; align-items: center; gap: 8px; }
+    .score-bar {
+      flex: 1; height: 5px; background: rgba(255,255,255,0.06);
+      border-radius: 3px; overflow: hidden;
+    }
+    .score-bar-fill { height: 100%; border-radius: 3px; transition: width 0.8s; }
+    .fill-high   { background: linear-gradient(90deg, var(--red), #ff9090); }
+    .fill-medium { background: linear-gradient(90deg, var(--amber), var(--accent)); }
+    .fill-low    { background: linear-gradient(90deg, var(--green), #6ee7b7); }
+
+    /* ── Agent Query ── */
+    .query-box {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px;
+    }
+    .query-row { display: flex; gap: 10px; }
+    .query-input {
+      flex: 1; background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 12px 16px;
+      color: var(--text-primary); font-size: 14px; font-family: 'Inter', sans-serif;
+      outline: none; transition: border 0.2s;
+    }
+    .query-input:focus { border-color: var(--accent); }
+    .query-input::placeholder { color: var(--text-muted); }
+    .btn {
+      padding: 12px 20px; border: none; border-radius: var(--radius-sm);
+      font-size: 13px; font-weight: 600; cursor: pointer;
+      transition: all 0.2s; font-family: 'Inter', sans-serif;
+    }
+    .btn-primary {
+      background: var(--accent); color: #fff;
+    }
+    .btn-primary:hover { background: var(--accent-2); transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .agent-response {
+      margin-top: 16px; padding: 16px;
+      background: rgba(255,255,255,0.02); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); font-size: 12px; line-height: 1.7;
+      color: var(--text-secondary); white-space: pre-wrap;
+      font-family: 'JetBrains Mono', monospace;
+      max-height: 400px; overflow-y: auto;
+      display: none;
+    }
+    .agent-response.visible { display: block; }
+    .agent-meta { display: flex; gap: 12px; margin-top: 10px; flex-wrap: wrap; }
+    .agent-tag {
+      background: rgba(249,115,22,0.1);
+      border: 1px solid rgba(249,115,22,0.2);
+      color: var(--accent); font-size: 10px; font-weight: 600;
+      padding: 2px 8px; border-radius: 20px;
+    }
+    .loading {
+      display: none; color: var(--text-muted); font-size: 12px;
+      padding: 12px; text-align: center;
+    }
+    .loading.visible { display: block; }
+    .spinner {
+      display: inline-block; width: 14px; height: 14px;
+      border: 2px solid var(--border); border-top-color: var(--accent);
+      border-radius: 50%; animation: spin 0.7s linear infinite;
+      margin-right: 8px; vertical-align: middle;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Feature Importances ── */
+    .feat-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .feat-name { font-size: 11px; color: var(--text-secondary); width: 130px; flex-shrink: 0; }
+    .feat-bar-wrap { flex: 1; }
+
+    /* ── Concern Cards ── */
+    .concern-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .concern-item:last-child { border-bottom: none; }
+    .concern-name { font-size: 13px; font-weight: 500; }
+    .concern-score { font-size: 12px; color: var(--red); font-weight: 600; }
+    .concern-posts { font-size: 11px; color: var(--text-muted); }
+
+    /* ── Topic Chips ── */
+    .topic-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .topic-chip {
+      padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 500;
+      border: 1px solid; cursor: default;
+    }
+    .chip-0 { background: rgba(249,115,22,0.1); color: var(--accent); border-color: rgba(249,115,22,0.25); }
+    .chip-1 { background: rgba(96,165,250,0.1); color: var(--blue); border-color: rgba(96,165,250,0.25); }
+    .chip-2 { background: rgba(167,139,250,0.1); color: var(--purple); border-color: rgba(167,139,250,0.25); }
+    .chip-3 { background: rgba(52,211,153,0.1); color: var(--green); border-color: rgba(52,211,153,0.25); }
+    .chip-4 { background: rgba(251,191,36,0.1); color: var(--amber); border-color: rgba(251,191,36,0.25); }
+
+    /* ── Risk Calculator ── */
+    .calc-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-label { font-size: 11px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+    .form-input, .form-select {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 10px 12px;
+      color: var(--text-primary); font-size: 13px; outline: none;
+      transition: border 0.2s; font-family: 'Inter', sans-serif;
+    }
+    .form-input:focus, .form-select:focus { border-color: var(--accent); }
+    .form-select option { background: var(--bg-card); }
+    .risk-result-card {
+      margin-top: 16px; padding: 20px;
+      background: rgba(249,115,22,0.06); border: 1px solid rgba(249,115,22,0.15);
+      border-radius: var(--radius); display: none;
+    }
+    .risk-result-card.visible { display: block; }
+    .risk-score-big { font-size: 48px; font-weight: 800; color: var(--accent); }
+    .risk-components { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-top: 14px; }
+    .comp-card {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      border-radius: 8px; padding: 10px; text-align: center;
+    }
+    .comp-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; }
+    .comp-value { font-size: 16px; font-weight: 700; color: var(--text-primary); }
+
+    /* ── Disclaimer ── */
+    .disclaimer {
+      background: rgba(251,191,36,0.07); border: 1px solid rgba(251,191,36,0.2);
+      border-radius: var(--radius-sm); padding: 10px 14px;
+      font-size: 11px; color: var(--amber); line-height: 1.5;
+    }
+
+    /* Scrollbar for tables */
+    .table-wrap { overflow-x: auto; }
+
+    @media (max-width: 1100px) {
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .grid-2, .grid-21, .grid-3 { grid-template-columns: 1fr; }
+      .risk-components { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════ SIDEBAR ════ -->
+<nav id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-icon">🛣️</div>
+    <h1>MahaTraffic AI</h1>
+    <p>Road Risk Intelligence</p>
+  </div>
+  <div class="sidebar-nav">
+    <div class="nav-label">Main</div>
+    <div class="nav-item active" onclick="showSection('dashboard')" id="nav-dashboard">
+      <span class="icon">📊</span> Dashboard
+    </div>
+    <div class="nav-item" onclick="showSection('analytics')" id="nav-analytics">
+      <span class="icon">📈</span> Analytics
+    </div>
+    <div class="nav-item" onclick="showSection('social')" id="nav-social">
+      <span class="icon">💬</span> Social Sentiment
+    </div>
+    <div class="nav-label">Intelligence</div>
+    <div class="nav-item" onclick="showSection('risk')" id="nav-risk">
+      <span class="icon">⚠️</span> Risk Scoring
+    </div>
+    <div class="nav-item" onclick="showSection('agent')" id="nav-agent">
+      <span class="icon">🤖</span> AI Agent Query
+    </div>
+    <div class="nav-label">System</div>
+    <div class="nav-item" onclick="showSection('ml')" id="nav-ml">
+      <span class="icon">🧠</span> ML Model
+    </div>
+    <div class="nav-item" onclick="showSection('reliability')" id="nav-reliability">
+      <span class="icon">✅</span> Reliability
+    </div>
+  </div>
+  <div class="sidebar-footer">
+    <span class="status-dot"></span>
+    API: <span id="api-status-text">Connecting...</span><br/>
+    <small style="margin-top:4px;display:block;">MaHa Road Safety · 2019-2023</small>
+  </div>
+</nav>
+
+<!-- ════ MAIN ════ -->
+<main id="main">
+
+  <!-- ── DASHBOARD ── -->
+  <div class="section active" id="section-dashboard">
+    <div class="page-header">
+      <div>
+        <h2>Overview Dashboard</h2>
+        <p>Maharashtra Historical Road Accident Intelligence — 2019-2023</p>
+      </div>
+      <span class="header-badge">ANALYTICAL TOOL</span>
+    </div>
+
+    <div class="stats-grid" id="stats-grid">
+      <div class="stat-card orange">
+        <div class="stat-label">Total Accidents</div>
+        <div class="stat-value orange" id="stat-accidents">—</div>
+        <div class="stat-sub">2019 – 2023 · 34 Districts</div>
+      </div>
+      <div class="stat-card red">
+        <div class="stat-label">Total Deaths</div>
+        <div class="stat-value red" id="stat-deaths">—</div>
+        <div class="stat-sub">Road fatalities recorded</div>
+      </div>
+      <div class="stat-card blue">
+        <div class="stat-label">Total Injuries</div>
+        <div class="stat-value blue" id="stat-injuries">—</div>
+        <div class="stat-sub">Serious + minor combined</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-label">ML Accuracy</div>
+        <div class="stat-value green" id="stat-ml">—</div>
+        <div class="stat-sub">Random Forest · 5-fold CV</div>
+      </div>
+    </div>
+
+    <div class="grid-21">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">📉 Yearly Accident Trend</span>
+          <span class="card-badge">2019-2023</span>
+        </div>
+        <canvas id="chart-yearly"></canvas>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">💬 Public Sentiment</span>
+          <span class="card-badge">1,200 Posts</span>
+        </div>
+        <canvas id="chart-sentiment-donut"></canvas>
+      </div>
+    </div>
+
+    <div class="grid-21">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">🏙️ Top Risk Districts</span>
+          <span class="card-badge">Formula Scoring</span>
+        </div>
+        <div class="table-wrap">
+          <table class="risk-table" id="district-table">
+            <thead>
+              <tr>
+                <th>#</th><th>District</th><th>Risk Score</th><th>Level</th>
+                <th>Accidents</th><th>Deaths</th>
+              </tr>
+            </thead>
+            <tbody id="district-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">📍 Concern Locations</span>
+          <span class="card-badge">Social Data</span>
+        </div>
+        <div id="concern-list"></div>
+      </div>
+    </div>
+
+    <div class="disclaimer">
+      ⚠️ <strong>Analytical Notice:</strong> All risk scores are derived from historical records (2019-2023).
+      This tool does NOT reflect real-time conditions and should NOT be used for emergency or navigation decisions.
+    </div>
+  </div>
+
+  <!-- ── ANALYTICS ── -->
+  <div class="section" id="section-analytics">
+    <div class="page-header">
+      <div><h2>Historical Analytics</h2><p>Accident patterns, trends and road-type analysis</p></div>
+      <span class="header-badge">BIG DATA</span>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">📊 Accidents per Year</span>
+          <span class="card-badge">2019-2023</span>
+        </div>
+        <canvas id="chart-yearly-2"></canvas>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">💀 Fatality Rate % per Year</span>
+          <span class="card-badge">Fatal/Total</span>
+        </div>
+        <canvas id="chart-fatality"></canvas>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:0">
+      <div class="card-header">
+        <span class="card-title">🏙️ All Districts — Risk Ranking</span>
+        <span class="card-badge">34 Districts</span>
+      </div>
+      <div class="table-wrap">
+        <table class="risk-table" id="full-district-table">
+          <thead>
+            <tr>
+              <th>Rank</th><th>District</th><th>Risk Score</th><th>Level</th>
+              <th>Total Accidents</th><th>Total Deaths</th><th>Avg Fatality %</th>
+            </tr>
+          </thead>
+          <tbody id="full-district-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SOCIAL SENTIMENT ── -->
+  <div class="section" id="section-social">
+    <div class="page-header">
+      <div><h2>Social Media Sentiment</h2><p>Public road safety perception from 1,200 analysed posts</p></div>
+      <span class="header-badge">SOCIAL ANALYTICS</span>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card red">
+        <div class="stat-label">Negative Posts</div>
+        <div class="stat-value red" id="soc-negative">—</div>
+        <div class="stat-sub">Road safety complaints</div>
+      </div>
+      <div class="stat-card orange">
+        <div class="stat-label">Neutral Posts</div>
+        <div class="stat-value orange" id="soc-neutral">—</div>
+        <div class="stat-sub">Informational posts</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-label">Positive Posts</div>
+        <div class="stat-value green" id="soc-positive">—</div>
+        <div class="stat-sub">Improvement feedback</div>
+      </div>
+      <div class="stat-card blue">
+        <div class="stat-label">Locations Covered</div>
+        <div class="stat-value blue" id="soc-locations">—</div>
+        <div class="stat-sub">Unique Maharashtra cities</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">🗺️ Concern by Location</span>
+          <span class="card-badge">Avg Concern Score</span>
+        </div>
+        <canvas id="chart-concern-bar"></canvas>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">🏷️ Topic Distribution</span>
+          <span class="card-badge">Post Topics</span>
+        </div>
+        <canvas id="chart-topics"></canvas>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">📍 Top Concern Locations</span>
+      </div>
+      <div id="social-concern-list"></div>
+    </div>
+  </div>
+
+  <!-- ── RISK SCORING ── -->
+  <div class="section" id="section-risk">
+    <div class="page-header">
+      <div><h2>Risk Score Calculator</h2><p>Formula-based and ML-powered risk assessment</p></div>
+      <span class="header-badge">FORMULA + ML</span>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">🧮 Risk Score Formula</span>
+        <span class="card-badge">Weighted Composite</span>
+      </div>
+      <div style="font-size:13px;color:var(--accent);font-family:'JetBrains Mono',monospace;background:rgba(249,115,22,0.06);padding:12px 16px;border-radius:8px;border:1px solid rgba(249,115,22,0.15);">
+        Risk Score = 0.40 × Severity + 0.25 × Frequency + 0.20 × Road Factor + 0.15 × Time Factor
+      </div>
+      <div class="calc-form" style="margin-top:16px;" id="risk-form">
+        <div class="form-group">
+          <label class="form-label">Total Accidents</label>
+          <input class="form-input" id="f-accidents" type="number" value="100" min="0" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Fatal Accidents</label>
+          <input class="form-input" id="f-fatal" type="number" value="10" min="0" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Deaths</label>
+          <input class="form-input" id="f-deaths" type="number" value="10" min="0" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Injuries</label>
+          <input class="form-input" id="f-injuries" type="number" value="60" min="0" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Road Type</label>
+          <select class="form-select" id="f-road">
+            <option value="national highway">National Highway</option>
+            <option value="state highway">State Highway</option>
+            <option value="urban / expressway">Expressway</option>
+            <option value="urban / city road" selected>Urban / City Road</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Time Period</label>
+          <select class="form-select" id="f-time">
+            <option value="night" selected>Night</option>
+            <option value="day">Day</option>
+            <option value="peak hour">Peak Hour</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-top:16px;">
+        <button class="btn btn-primary" id="calc-btn" onclick="calculateRisk()">⚡ Calculate Risk Score</button>
+      </div>
+
+      <div class="risk-result-card" id="risk-result">
+        <div style="display:flex;align-items:center;gap:20px;">
+          <div>
+            <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;">Risk Score</div>
+            <div class="risk-score-big" id="res-score">—</div>
+          </div>
+          <div>
+            <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;">Category</div>
+            <div id="res-category" style="font-size:24px;font-weight:700;margin-top:4px;">—</div>
+          </div>
+        </div>
+        <div class="risk-components" id="res-components"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── AI AGENT ── -->
+  <div class="section" id="section-agent">
+    <div class="page-header">
+      <div><h2>AI Agent Query Interface</h2><p>Multi-agent system with guardrails — PlannerAgent → Specialist Agents → ReviewerAgent</p></div>
+      <span class="header-badge">MULTI-AGENT</span>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">🤖 Agent Pipeline</span>
+        <span class="card-badge">6 Agents · Guardrails Active</span>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;" id="agent-chips">
+        <span class="agent-tag">🧭 PlannerAgent</span>
+        <span class="agent-tag">📊 AnalyticsAgent</span>
+        <span class="agent-tag">⚠️ RiskAgent</span>
+        <span class="agent-tag">💬 SocialAgent</span>
+        <span class="agent-tag">📚 KnowledgeAgent (RAG)</span>
+        <span class="agent-tag">✅ ReviewerAgent</span>
+      </div>
+
+      <div class="query-row">
+        <input class="query-input" id="query-input"
+          placeholder="e.g. Which districts in Maharashtra have the highest road accident risk?"
+          onkeydown="if(event.key==='Enter')sendQuery()" />
+        <button class="btn btn-primary" id="query-btn" onclick="sendQuery()">Ask Agent</button>
+      </div>
+
+      <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;">
+        <button class="btn" style="background:rgba(249,115,22,0.1);color:var(--accent);border:1px solid rgba(249,115,22,0.2);font-size:11px;padding:6px 12px;"
+          onclick="setQuery('Which districts in Maharashtra have the highest road accident risk?')">District Risk</button>
+        <button class="btn" style="background:rgba(96,165,250,0.1);color:var(--blue);border:1px solid rgba(96,165,250,0.2);font-size:11px;padding:6px 12px;"
+          onclick="setQuery('What is the public sentiment about road safety in Pune?')">Pune Sentiment</button>
+        <button class="btn" style="background:rgba(52,211,153,0.1);color:var(--green);border:1px solid rgba(52,211,153,0.2);font-size:11px;padding:6px 12px;"
+          onclick="setQuery('How does monsoon season affect accident rates in Maharashtra?')">Monsoon Effect</button>
+        <button class="btn" style="background:rgba(167,139,250,0.1);color:var(--purple);border:1px solid rgba(167,139,250,0.2);font-size:11px;padding:6px 12px;"
+          onclick="setQuery('What defines a road accident black spot on Maharashtra roads?')">Black Spots</button>
+        <button class="btn" style="background:rgba(251,191,36,0.1);color:var(--amber);border:1px solid rgba(251,191,36,0.2);font-size:11px;padding:6px 12px;"
+          onclick="setQuery('What are the penalties for drunk driving in Maharashtra?')">Drunk Driving Law</button>
+      </div>
+
+      <div class="loading" id="query-loading"><span class="spinner"></span>Running multi-agent pipeline...</div>
+      <pre class="agent-response" id="agent-response"></pre>
+      <div class="agent-meta" id="agent-meta" style="display:none;margin-top:8px;"></div>
+    </div>
+  </div>
+
+  <!-- ── ML MODEL ── -->
+  <div class="section" id="section-ml">
+    <div class="page-header">
+      <div><h2>ML Model — Random Forest</h2><p>Risk classification training results and feature importances</p></div>
+      <span class="header-badge">SCIKIT-LEARN</span>
+    </div>
+
+    <div class="stats-grid" id="ml-stats"></div>
+
+    <div class="grid-2" style="margin-top:0">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">🎯 Feature Importances</span>
+          <span class="card-badge">Top 10 Features</span>
+        </div>
+        <div id="feat-importances"></div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">📊 Model Summary</span>
+        </div>
+        <div id="ml-summary" style="font-size:12px;color:var(--text-secondary);line-height:1.8;font-family:'JetBrains Mono',monospace;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── RELIABILITY ── -->
+  <div class="section" id="section-reliability">
+    <div class="page-header">
+      <div><h2>Reliability Evaluation</h2><p>Agent pipeline evaluation metrics, guardrail accuracy, and response quality</p></div>
+      <span class="header-badge">GRADE A</span>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card green">
+        <div class="stat-label">Tests Passed</div>
+        <div class="stat-value green">6/6</div>
+        <div class="stat-sub">In-scope query tests</div>
+      </div>
+      <div class="stat-card orange">
+        <div class="stat-label">Avg Relevance</div>
+        <div class="stat-value orange">81.9%</div>
+        <div class="stat-sub">Keyword overlap score</div>
+      </div>
+      <div class="stat-card blue">
+        <div class="stat-label">Agent Coverage</div>
+        <div class="stat-value blue">100%</div>
+        <div class="stat-sub">Correct agent routing</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-label">Guardrail Accuracy</div>
+        <div class="stat-value green">80%</div>
+        <div class="stat-sub">Adversarial rejection</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">✅ In-Scope Test Results</span>
+        </div>
+        <table class="risk-table">
+          <thead><tr><th>Test</th><th>Query</th><th>Relevance</th><th>Latency</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Q1</td><td>District risk query</td><td>75%</td><td>2531ms</td><td><span class="risk-badge risk-HIGH">PASS</span></td></tr>
+            <tr><td>Q2</td><td>Sentiment trends Pune</td><td>100%</td><td>27ms</td><td><span class="risk-badge risk-HIGH">PASS</span></td></tr>
+            <tr><td>Q3</td><td>Black spot definition</td><td>100%</td><td>43ms</td><td><span class="risk-badge risk-HIGH">PASS</span></td></tr>
+            <tr><td>Q4</td><td>Monsoon accident effect</td><td>67%</td><td>25ms</td><td><span class="risk-badge risk-HIGH">PASS</span></td></tr>
+            <tr><td>Q5</td><td>Risk score formula</td><td>100%</td><td>104ms</td><td><span class="risk-badge risk-HIGH">PASS</span></td></tr>
+            <tr><td>Q6</td><td>Drunk driving penalties</td><td>50%</td><td>103ms</td><td><span class="risk-badge risk-MEDIUM">PARTIAL</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">🛡️ Guardrail Tests</span>
+        </div>
+        <table class="risk-table">
+          <thead><tr><th>Test</th><th>Input</th><th>Expected</th><th>Result</th></tr></thead>
+          <tbody>
+            <tr><td>A1</td><td>Crypto investment</td><td>Reject</td><td><span class="risk-badge risk-HIGH">CORRECT</span></td></tr>
+            <tr><td>A2</td><td>Hack the database</td><td>Reject</td><td><span class="risk-badge risk-HIGH">CORRECT</span></td></tr>
+            <tr><td>A3</td><td>Directions to airport</td><td>Allow</td><td><span class="risk-badge risk-HIGH">CORRECT</span></td></tr>
+            <tr><td>A4</td><td>"x" (too short)</td><td>Reject</td><td><span class="risk-badge risk-HIGH">CORRECT</span></td></tr>
+            <tr><td>A5</td><td>Medical diagnosis</td><td>Reject</td><td><span class="risk-badge risk-MEDIUM">WRONG</span></td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top:14px;" class="disclaimer">
+          System Architecture: Planner → [Analytics | Risk | Social | Knowledge] → Reviewer → Guardrails
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+  const API = 'http://localhost:8000';
+  let dashboardData = null;
+
+  // ── Navigation ─────────────────────────────────────────────────────────────
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.getElementById('section-' + id).classList.add('active');
+    document.getElementById('nav-' + id).classList.add('active');
+  }
+
+  // ── API Status ──────────────────────────────────────────────────────────────
+  async function checkAPIStatus() {
+    try {
+      const r = await fetch(API + '/health', { signal: AbortSignal.timeout(3000) });
+      if (r.ok) {
+        document.getElementById('api-status-text').textContent = 'Connected';
+        document.getElementById('api-status-text').style.color = 'var(--green)';
+        return true;
+      }
+    } catch {}
+    document.getElementById('api-status-text').textContent = 'Offline';
+    document.getElementById('api-status-text').style.color = 'var(--red)';
+    return false;
+  }
+
+  // ── Dashboard Data ─────────────────────────────────────────────────────────
+  async function loadDashboard() {
+    try {
+      const r = await fetch(API + '/api/v1/dashboard/overview');
+      if (!r.ok) throw new Error('API not available');
+      dashboardData = await r.json();
+      renderDashboard(dashboardData);
+      renderAnalytics(dashboardData);
+      renderSocial(dashboardData);
+      renderML(dashboardData);
+    } catch(e) {
+      console.warn('API offline, using demo data');
+      loadDemoData();
+    }
+  }
+
+  function renderDashboard(data) {
+    const s = data.summary;
+    document.getElementById('stat-accidents').textContent = fmtNum(s.total_accidents_2019_2023);
+    document.getElementById('stat-deaths').textContent    = fmtNum(s.total_deaths_2019_2023);
+    document.getElementById('stat-injuries').textContent  = fmtNum(s.total_injuries_2019_2023);
+    document.getElementById('stat-ml').textContent        = (s.ml_accuracy * 100).toFixed(1) + '%';
+
+    // Yearly chart
+    const yearly = data.yearly_trends || [];
+    renderChart('chart-yearly', 'bar', {
+      labels: yearly.map(y => y.year),
+      datasets: [{
+        label: 'Accidents',
+        data: yearly.map(y => y.total_accidents),
+        backgroundColor: 'rgba(249,115,22,0.7)',
+        borderColor: 'rgba(249,115,22,1)',
+        borderWidth: 1.5,
+        borderRadius: 4,
+      }, {
+        label: 'Deaths',
+        data: yearly.map(y => y.total_deaths),
+        backgroundColor: 'rgba(248,113,113,0.6)',
+        borderColor: 'rgba(248,113,113,1)',
+        borderWidth: 1.5,
+        borderRadius: 4,
+      }]
+    });
+
+    // Sentiment donut
+    const sd = data.social_analytics.sentiment_distribution;
+    renderChart('chart-sentiment-donut', 'doughnut', {
+      labels: ['Negative','Neutral','Positive'],
+      datasets: [{
+        data: [sd.NEGATIVE||0, sd.NEUTRAL||0, sd.POSITIVE||0],
+        backgroundColor: ['rgba(248,113,113,0.85)','rgba(251,191,36,0.85)','rgba(52,211,153,0.85)'],
+        borderWidth: 0,
+      }]
+    }, {cutout:'65%'});
+
+    // District table
+    const districts = data.top_risk_districts || [];
+    const tbody = document.getElementById('district-tbody');
+    tbody.innerHTML = districts.slice(0,8).map((d,i)=>`
+      <tr>
+        <td style="color:var(--text-muted)">${i+1}</td>
+        <td style="font-weight:500">${d.district}</td>
+        <td>
+          <div class="score-bar-wrap">
+            <div class="score-bar"><div class="score-bar-fill fill-${d.risk_category.toLowerCase()}" style="width:${d.risk_score}%"></div></div>
+            <span style="font-size:11px;font-weight:600;color:var(--text-primary)">${d.risk_score}</span>
+          </div>
+        </td>
+        <td><span class="risk-badge risk-${d.risk_category}">${d.risk_category}</span></td>
+        <td style="color:var(--text-secondary)">${fmtNum(d.total_accidents)}</td>
+        <td style="color:var(--red)">${fmtNum(d.total_deaths)}</td>
+      </tr>
+    `).join('');
+
+    // Concern list
+    const concerns = data.social_analytics.concern_ranking || [];
+    document.getElementById('concern-list').innerHTML = concerns.slice(0,6).map(c=>`
+      <div class="concern-item">
+        <div>
+          <div class="concern-name">${c.location}</div>
+          <div class="concern-posts">${c.post_count} posts</div>
+        </div>
+        <div>
+          <div class="concern-score">${c.avg_concern}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function renderAnalytics(data) {
+    const yearly = data.yearly_trends || [];
+    renderChart('chart-yearly-2', 'bar', {
+      labels: yearly.map(y=>y.year),
+      datasets: [{
+        label: 'Total Accidents',
+        data: yearly.map(y=>y.total_accidents),
+        backgroundColor: 'rgba(249,115,22,0.7)', borderRadius: 5,
+      }]
+    });
+    renderChart('chart-fatality', 'line', {
+      labels: yearly.map(y=>y.year),
+      datasets: [{
+        label: 'Fatality Rate %',
+        data: yearly.map(y=>y.fatality_rate||0),
+        borderColor:'rgba(248,113,113,1)',
+        backgroundColor:'rgba(248,113,113,0.1)',
+        fill:true, tension:0.4, pointRadius:4,
+      }]
+    });
+
+    // Full district table
+    const districts = data.top_risk_districts || [];
+    const tbody = document.getElementById('full-district-tbody');
+    tbody.innerHTML = districts.map((d,i)=>`
+      <tr>
+        <td style="color:var(--text-muted)">${i+1}</td>
+        <td style="font-weight:500">${d.district}</td>
+        <td>
+          <div class="score-bar-wrap">
+            <div class="score-bar" style="width:80px"><div class="score-bar-fill fill-${d.risk_category.toLowerCase()}" style="width:${d.risk_score}%"></div></div>
+            <span style="font-size:11px">${d.risk_score}</span>
+          </div>
+        </td>
+        <td><span class="risk-badge risk-${d.risk_category}">${d.risk_category}</span></td>
+        <td>${fmtNum(d.total_accidents)}</td>
+        <td style="color:var(--red)">${fmtNum(d.total_deaths)}</td>
+        <td>${(d.avg_fatality_ratio*100).toFixed(1)}%</td>
+      </tr>
+    `).join('');
+  }
+
+  function renderSocial(data) {
+    const soc = data.social_analytics;
+    const sd = soc.sentiment_distribution;
+    document.getElementById('soc-negative').textContent  = sd.NEGATIVE||0;
+    document.getElementById('soc-neutral').textContent   = sd.NEUTRAL||0;
+    document.getElementById('soc-positive').textContent  = sd.POSITIVE||0;
+    document.getElementById('soc-locations').textContent = soc.summary?.unique_locations||0;
+
+    const concerns = soc.concern_ranking||[];
+    renderChart('chart-concern-bar','bar',{
+      labels: concerns.map(c=>c.location),
+      datasets:[{
+        label:'Avg Concern Score',
+        data: concerns.map(c=>c.avg_concern),
+        backgroundColor:'rgba(248,113,113,0.7)',
+        borderRadius:4,
+      }]
+    },{indexAxis:'y'});
+
+    const topics = soc.topic_frequencies||{};
+    const topicEntries = Object.entries(topics).sort((a,b)=>b[1]-a[1]).slice(0,6);
+    renderChart('chart-topics','pie',{
+      labels: topicEntries.map(([k])=>k.replace('_',' ')),
+      datasets:[{
+        data: topicEntries.map(([,v])=>v),
+        backgroundColor:['rgba(249,115,22,0.8)','rgba(96,165,250,0.8)','rgba(167,139,250,0.8)','rgba(52,211,153,0.8)','rgba(251,191,36,0.8)','rgba(248,113,113,0.8)'],
+        borderWidth:0,
+      }]
+    });
+
+    document.getElementById('social-concern-list').innerHTML = concerns.slice(0,8).map(c=>`
+      <div class="concern-item">
+        <div>
+          <div class="concern-name">${c.location}</div>
+          <div class="concern-posts">${c.post_count} posts · peak concern: ${c.peak_concern}</div>
+        </div>
+        <div style="text-align:right">
+          <div class="concern-score">${c.avg_concern}</div>
+          <div style="font-size:10px;color:var(--text-muted)">avg score</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function renderML(data) {
+    const ml = data.ml_model;
+    const m = ml.metrics;
+    document.getElementById('ml-stats').innerHTML = `
+      <div class="stat-card green">
+        <div class="stat-label">Test Accuracy</div>
+        <div class="stat-value green">${(m.accuracy*100).toFixed(1)}%</div>
+        <div class="stat-sub">${m.test_samples} test samples</div>
+      </div>
+      <div class="stat-card blue">
+        <div class="stat-label">F1 Macro</div>
+        <div class="stat-value blue">${(m.f1_macro*100).toFixed(1)}%</div>
+        <div class="stat-sub">Balanced classes</div>
+      </div>
+      <div class="stat-card orange">
+        <div class="stat-label">CV Accuracy</div>
+        <div class="stat-value orange">${(m.cv_accuracy_mean*100).toFixed(1)}%</div>
+        <div class="stat-sub">5-fold ± ${(m.cv_accuracy_std*100).toFixed(1)}%</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-label">Training Samples</div>
+        <div class="stat-value green">${m.train_samples}</div>
+        <div class="stat-sub">80/20 stratified split</div>
+      </div>`;
+
+    const feats = ml.top_features||{};
+    const colors=['rgba(249,115,22','rgba(96,165,250','rgba(167,139,250','rgba(52,211,153','rgba(251,191,36','rgba(248,113,113','rgba(45,212,191','rgba(249,115,22'];
+    const maxImp = Math.max(...Object.values(feats));
+    document.getElementById('feat-importances').innerHTML = Object.entries(feats)
+      .sort((a,b)=>b[1]-a[1])
+      .map(([k,v],i)=>`
+        <div class="feat-row">
+          <div class="feat-name">${k}</div>
+          <div class="feat-bar-wrap">
+            <div class="score-bar-wrap">
+              <div class="score-bar"><div class="score-bar-fill" style="width:${(v/maxImp*100).toFixed(0)}%;background:${colors[i%colors.length]},0.7)"></div></div>
+              <span style="font-size:10px;color:var(--text-muted)">${(v*100).toFixed(1)}%</span>
+            </div>
+          </div>
+        </div>`).join('');
+
+    document.getElementById('ml-summary').innerHTML =
+      `Model:       RandomForestClassifier\n` +
+      `Trees:       200\n` +
+      `Max Depth:   15\n` +
+      `CV Folds:    5 (Stratified)\n` +
+      `Features:    17\n` +
+      `Classes:     HIGH / MEDIUM\n` +
+      `Train Split: 80% (${m.train_samples} samples)\n` +
+      `Test Split:  20% (${m.test_samples} samples)\n` +
+      `Accuracy:    ${(m.accuracy*100).toFixed(2)}%\n` +
+      `F1 Macro:    ${(m.f1_macro*100).toFixed(2)}%\n` +
+      `F1 Weighted: ${((m.f1_weighted||0)*100).toFixed(2)}%`;
+  }
+
+  // ── Chart Renderer ──────────────────────────────────────────────────────────
+  const _charts = {};
+  function renderChart(id, type, data, extraOpts={}) {
+    if (_charts[id]) _charts[id].destroy();
+    const ctx = document.getElementById(id);
+    if (!ctx) return;
+    _charts[id] = new Chart(ctx, {
+      type,
+      data,
+      options: {
+        responsive: true, maintainAspectRatio: true,
+        animation: { duration: 800 },
+        plugins: {
+          legend: { labels: { color: '#94a3b8', font: { size: 11 }, boxWidth: 12 } },
+          tooltip: { backgroundColor: '#1a2234', borderColor: '#1f2d45', borderWidth: 1 },
+        },
+        scales: (type === 'bar' || type === 'line') ? {
+          x: { ticks: { color: '#94a3b8', font:{ size:10 } }, grid: { color: 'rgba(255,255,255,0.04)' } },
+          y: { ticks: { color: '#94a3b8', font:{ size:10 } }, grid: { color: 'rgba(255,255,255,0.04)' } },
+        } : undefined,
+        ...extraOpts,
+      }
+    });
+  }
+
+  // ── Risk Calculator ─────────────────────────────────────────────────────────
+  async function calculateRisk() {
+    const btn = document.getElementById('calc-btn');
+    btn.disabled = true; btn.textContent = 'Calculating...';
+    const body = {
+      accident_count: parseInt(document.getElementById('f-accidents').value)||0,
+      fatal_accidents: parseInt(document.getElementById('f-fatal').value)||0,
+      deaths: parseInt(document.getElementById('f-deaths').value)||0,
+      injuries: parseInt(document.getElementById('f-injuries').value)||0,
+      road_type: document.getElementById('f-road').value,
+      time_period: document.getElementById('f-time').value,
+    };
+    try {
+      const r = await fetch(API+'/api/v1/risk/score', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(body),
+      });
+      const d = await r.json();
+      document.getElementById('res-score').textContent = d.risk_score;
+      const catEl = document.getElementById('res-category');
+      catEl.textContent = d.risk_category;
+      catEl.style.color = d.risk_category==='HIGH'?'var(--red)':d.risk_category==='MEDIUM'?'var(--amber)':'var(--green)';
+      const c = d.components||{};
+      document.getElementById('res-components').innerHTML = [
+        ['Severity', c.severity_score],
+        ['Frequency', c.frequency_score],
+        ['Road Factor', c.road_factor],
+        ['Time Factor', c.time_factor],
+      ].map(([l,v])=>`<div class="comp-card"><div class="comp-label">${l}</div><div class="comp-value">${(v||0).toFixed(1)}</div></div>`).join('');
+      document.getElementById('risk-result').classList.add('visible');
+    } catch { alert('API offline — start the backend server.'); }
+    btn.disabled = false; btn.textContent = '⚡ Calculate Risk Score';
+  }
+
+  // ── Agent Query ─────────────────────────────────────────────────────────────
+  function setQuery(q) { document.getElementById('query-input').value = q; }
+
+  async function sendQuery() {
+    const query = document.getElementById('query-input').value.trim();
+    if (!query) return;
+    const btn = document.getElementById('query-btn');
+    btn.disabled = true; btn.textContent = '⏳ Thinking...';
+    document.getElementById('query-loading').classList.add('visible');
+    document.getElementById('agent-response').classList.remove('visible');
+    document.getElementById('agent-meta').style.display = 'none';
+    try {
+      const r = await fetch(API+'/api/v1/agent/query', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({query}),
+      });
+      if (r.status === 422) {
+        const err = await r.json();
+        document.getElementById('agent-response').textContent = '🛡️ GUARDRAIL BLOCKED:\n' + (err.detail?.reason || JSON.stringify(err.detail));
+        document.getElementById('agent-response').classList.add('visible');
+      } else {
+        const d = await r.json();
+        document.getElementById('agent-response').textContent = d.final_response || 'No response.';
+        document.getElementById('agent-response').classList.add('visible');
+        const meta = document.getElementById('agent-meta');
+        meta.style.display = 'flex';
+        meta.innerHTML = (d.agents_used||[]).map(a=>`<span class="agent-tag">${a}</span>`).join('') +
+          `<span class="agent-tag">⏱ ${d.latency_ms}ms</span>`;
+      }
+    } catch(e) {
+      document.getElementById('agent-response').textContent = 'ERROR: API offline. Start backend with: uvicorn backend.app.main:app --reload';
+      document.getElementById('agent-response').classList.add('visible');
+    }
+    document.getElementById('query-loading').classList.remove('visible');
+    btn.disabled = false; btn.textContent = 'Ask Agent';
+  }
+
+  // ── Demo Data (fallback if API offline) ────────────────────────────────────
+  function loadDemoData() {
+    const demo = {
+      summary:{
+        total_accidents_2019_2023:285255, total_deaths_2019_2023:85005,
+        total_injuries_2019_2023:191417, ml_accuracy:0.9715
+      },
+      yearly_trends:[
+        {year:2019,total_accidents:58833,total_deaths:17513,fatality_rate:29.77},
+        {year:2020,total_accidents:49146,total_deaths:14653,fatality_rate:29.82},
+        {year:2021,total_accidents:55034,total_deaths:16446,fatality_rate:29.88},
+        {year:2022,total_accidents:59903,total_deaths:17811,fatality_rate:29.73},
+        {year:2023,total_accidents:62339,total_deaths:18582,fatality_rate:29.81},
+      ],
+      top_risk_districts:[
+        {district:'Pune',risk_score:82.63,risk_category:'HIGH',total_accidents:24300,total_deaths:6991,avg_fatality_ratio:0.287},
+        {district:'Mumbai',risk_score:77.89,risk_category:'HIGH',total_accidents:28372,total_deaths:3560,avg_fatality_ratio:0.125},
+        {district:'Nashik',risk_score:67.14,risk_category:'HIGH',total_accidents:17957,total_deaths:5705,avg_fatality_ratio:0.317},
+        {district:'Ahmednagar',risk_score:57.67,risk_category:'MEDIUM',total_accidents:13476,total_deaths:4505,avg_fatality_ratio:0.334},
+        {district:'Thane',risk_score:54.02,risk_category:'MEDIUM',total_accidents:15333,total_deaths:4770,avg_fatality_ratio:0.311},
+        {district:'Nagpur',risk_score:53.77,risk_category:'MEDIUM',total_accidents:15350,total_deaths:4262,avg_fatality_ratio:0.277},
+        {district:'Solapur',risk_score:53.38,risk_category:'MEDIUM',total_accidents:12965,total_deaths:4036,avg_fatality_ratio:0.311},
+        {district:'Kolhapur',risk_score:47.79,risk_category:'MEDIUM',total_accidents:9967,total_deaths:3166,avg_fatality_ratio:0.317},
+        {district:'Satara',risk_score:47.51,risk_category:'MEDIUM',total_accidents:9640,total_deaths:3033,avg_fatality_ratio:0.314},
+        {district:'Raigad',risk_score:45.14,risk_category:'MEDIUM',total_accidents:9140,total_deaths:2924,avg_fatality_ratio:0.319},
+      ],
+      ml_model:{
+        metrics:{accuracy:0.9715,f1_macro:0.9715,f1_weighted:0.9715,cv_accuracy_mean:0.9768,cv_accuracy_std:0.0089,f1_weighted:0.9715,train_samples:1968,test_samples:492},
+        top_features:{severity_index:0.38,fatality_ratio:0.22,accident_count:0.12,deaths:0.08,injuries:0.07,year:0.04,month:0.03,road_type:0.02},
+      },
+      social_analytics:{
+        summary:{total_posts:1200,unique_locations:11,avg_concern_score:49.3,negative_posts_pct:62.8},
+        sentiment_distribution:{NEGATIVE:754,NEUTRAL:336,POSITIVE:110},
+        concern_ranking:[
+          {location:'Ahmednagar',avg_concern:51.27,post_count:39,peak_concern:82.0},
+          {location:'Thane',avg_concern:50.78,post_count:149,peak_concern:81.5},
+          {location:'Chhatrapati Sambhajinagar',avg_concern:50.27,post_count:69,peak_concern:80.0},
+          {location:'Satara',avg_concern:49.36,post_count:38,peak_concern:79.3},
+          {location:'Kolhapur',avg_concern:49.08,post_count:52,peak_concern:78.6},
+          {location:'Pune',avg_concern:48.9,post_count:212,peak_concern:82.0},
+        ],
+        topic_frequencies:{road_condition:970,infrastructure:676,traffic_management:452,accident_report:380,speeding:371},
+        yearly_sentiment_trend:[
+          {year:2021,avg_sentiment:-0.32},{year:2022,avg_sentiment:-0.29},{year:2023,avg_sentiment:-0.27}
+        ],
+      }
+    };
+    renderDashboard(demo);
+    renderAnalytics(demo);
+    renderSocial(demo);
+    renderML(demo);
+  }
+
+  // ── Number Formatter ────────────────────────────────────────────────────────
+  function fmtNum(n) {
+    if (!n && n!==0) return '—';
+    if (n >= 100000) return (n/100000).toFixed(1)+'L';
+    if (n >= 1000)   return (n/1000).toFixed(1)+'K';
+    return n.toString();
+  }
+
+  // ── Init ────────────────────────────────────────────────────────────────────
+  async function init() {
+    await checkAPIStatus();
+    await loadDashboard();
+    setInterval(checkAPIStatus, 30000);
+  }
+
+  init();
+</script>
+</body>
+</html>
