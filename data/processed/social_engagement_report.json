@@ -1,0 +1,130 @@
+{
+  "total_posts": 1200,
+  "total_engagement_score": 48385.0,
+  "mean_engagement_score": 40.32,
+  "median_engagement_score": 35.0,
+  "max_engagement_score": 185.0,
+  "p90_threshold": 74.0,
+  "high_engagement_count": 123,
+  "engagement_by_sentiment": {
+    "NEGATIVE": {
+      "count": 968,
+      "mean_engagement": 39.86,
+      "total_engagement": 38581.0
+    },
+    "NEUTRAL": {
+      "count": 122,
+      "mean_engagement": 41.89,
+      "total_engagement": 5110.0
+    },
+    "POSITIVE": {
+      "count": 110,
+      "mean_engagement": 42.67,
+      "total_engagement": 4694.0
+    }
+  },
+  "top_locations_by_engagement": [
+    {
+      "location": "Pune",
+      "post_count": 276,
+      "avg_engagement": 39.33,
+      "total_engagement": 10856.0
+    },
+    {
+      "location": "Mumbai",
+      "post_count": 234,
+      "avg_engagement": 39.89,
+      "total_engagement": 9334.0
+    },
+    {
+      "location": "Thane",
+      "post_count": 149,
+      "avg_engagement": 40.96,
+      "total_engagement": 6103.0
+    },
+    {
+      "location": "Nagpur",
+      "post_count": 122,
+      "avg_engagement": 42.9,
+      "total_engagement": 5234.0
+    },
+    {
+      "location": "Nashik",
+      "post_count": 120,
+      "avg_engagement": 40.77,
+      "total_engagement": 4892.0
+    },
+    {
+      "location": "Chhatrapati Sambhajinagar",
+      "post_count": 69,
+      "avg_engagement": 43.43,
+      "total_engagement": 2997.0
+    },
+    {
+      "location": "Solapur",
+      "post_count": 61,
+      "avg_engagement": 37.74,
+      "total_engagement": 2302.0
+    },
+    {
+      "location": "Kolhapur",
+      "post_count": 52,
+      "avg_engagement": 41.6,
+      "total_engagement": 2163.0
+    },
+    {
+      "location": "Satara",
+      "post_count": 38,
+      "avg_engagement": 44.13,
+      "total_engagement": 1677.0
+    },
+    {
+      "location": "Ahmednagar",
+      "post_count": 39,
+      "avg_engagement": 41.95,
+      "total_engagement": 1636.0
+    }
+  ],
+  "top_viral_posts": [
+    {
+      "post_id": "MAHA_SOC_00335",
+      "text": "Traffic signals completely dead at major four-way junction in Nagpur. Continuous chaos and minor fender benders. SignalF",
+      "location": "Nagpur",
+      "engagement_score": 185.0,
+      "likes": 162,
+      "shares": 7
+    },
+    {
+      "post_id": "MAHA_SOC_00374",
+      "text": "Streetlights non-functional for past 2 weeks on Mumbai outer ring road. Zero visibility at night, high risk of head-on c",
+      "location": "Mumbai",
+      "engagement_score": 147.0,
+      "likes": 52,
+      "shares": 10
+    },
+    {
+      "post_id": "MAHA_SOC_00490",
+      "text": "Vehicles driving on wrong side and over-speeding near Mumbai bypass. Severe accident spot! Strict policing needed. Traff",
+      "location": "Mumbai",
+      "engagement_score": 144.0,
+      "likes": 121,
+      "shares": 1
+    },
+    {
+      "post_id": "MAHA_SOC_00136",
+      "text": "Massive potholes on Nagpur road near the main flyover. Commuters risking lives every day! PotholeAlert RoadSafety",
+      "location": "Nagpur",
+      "engagement_score": 142.0,
+      "likes": 54,
+      "shares": 26
+    },
+    {
+      "post_id": "MAHA_SOC_00130",
+      "text": "Massive potholes on Mumbai road near the main flyover. Commuters risking lives every day! PotholeAlert RoadSafety",
+      "location": "Mumbai",
+      "engagement_score": 140.0,
+      "likes": 48,
+      "shares": 13
+    }
+  ]
+}

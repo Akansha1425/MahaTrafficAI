@@ -1,0 +1,128 @@
+{
+  "total_posts": 1200,
+  "sentiment_distribution": {
+    "NEGATIVE": 754,
+    "NEUTRAL": 336,
+    "POSITIVE": 110
+  },
+  "location_concern_ranking": [
+    {
+      "location": "Ahmednagar",
+      "avg_concern": 51.27,
+      "post_count": 39,
+      "peak_concern": 90.0
+    },
+    {
+      "location": "Thane",
+      "avg_concern": 50.78,
+      "post_count": 149,
+      "peak_concern": 97.0
+    },
+    {
+      "location": "Chhatrapati Sambhajinagar",
+      "avg_concern": 50.27,
+      "post_count": 69,
+      "peak_concern": 96.1
+    },
+    {
+      "location": "Satara",
+      "avg_concern": 49.36,
+      "post_count": 38,
+      "peak_concern": 100.0
+    },
+    {
+      "location": "Kolhapur",
+      "avg_concern": 49.08,
+      "post_count": 52,
+      "peak_concern": 96.4
+    },
+    {
+      "location": "Nagpur",
+      "avg_concern": 48.1,
+      "post_count": 122,
+      "peak_concern": 100.0
+    },
+    {
+      "location": "Mumbai",
+      "avg_concern": 48.04,
+      "post_count": 234,
+      "peak_concern": 97.0
+    },
+    {
+      "location": "Pune",
+      "avg_concern": 46.45,
+      "post_count": 276,
+      "peak_concern": 100.0
+    },
+    {
+      "location": "Solapur",
+      "avg_concern": 46.17,
+      "post_count": 61,
+      "peak_concern": 84.5
+    },
+    {
+      "location": "Nashik",
+      "avg_concern": 45.27,
+      "post_count": 120,
+      "peak_concern": 100.0
+    }
+  ],
+  "yearly_sentiment_trend": [
+    {
+      "year": 2021,
+      "avg_sentiment": -0.606
+    },
+    {
+      "year": 2022,
+      "avg_sentiment": -0.5788
+    },
+    {
+      "year": 2023,
+      "avg_sentiment": -0.59
+    }
+  ],
+  "topic_frequency": {
+    "road_condition": 970,
+    "infrastructure": 676,
+    "traffic_management": 452,
+    "accident_report": 380,
+    "speeding": 371
+  },
+  "most_concerning_posts": [
+    {
+      "post_id": "MAHA_SOC_00241",
+      "text": "Illegal road digging and open gravel left unattended on Nagpur main avenue. Two-wheelers constantly slipping. #TwoWheelerSafety #NagpurCivic",
+      "location": "Nagpur",
+      "concern_score": 100.0,
+      "sentiment_label": "NEGATIVE"
+    },
+    {
+      "post_id": "MAHA_SOC_00336",
+      "text": "Dangerous black spot identified on Satara ghat section. Multiple heavy trucks overturned this month. Where are crash barriers? #BlackSpot #HighwaySafety",
+      "location": "Satara",
+      "concern_score": 100.0,
+      "sentiment_label": "NEGATIVE"
+    },
+    {
+      "post_id": "MAHA_SOC_00346",
+      "text": "Vehicles driving on wrong side and over-speeding near Pune bypass. Severe accident spot! Strict policing needed. #TrafficViolation #Pune",
+      "location": "Pune",
+      "concern_score": 100.0,
+      "sentiment_label": "NEGATIVE"
+    },
+    {
+      "post_id": "MAHA_SOC_00784",
+      "text": "Deep trenches near bus stop in Pune. Multiple bikers injured yesterday during evening drizzle. Urgent repairs requested. #RoadHazards #Pune",
+      "location": "Pune",
+      "concern_score": 100.0,
+      "sentiment_label": "NEGATIVE"
+    },
+    {
+      "post_id": "MAHA_SOC_00947",
+      "text": "Dangerous black spot identified on Pune ghat section. Multiple heavy trucks overturned this month. Where are crash barriers? #BlackSpot #HighwaySafety",
+      "location": "Pune",
+      "concern_score": 100.0,
+      "sentiment_label": "NEGATIVE"
+    }
+  ]
+}

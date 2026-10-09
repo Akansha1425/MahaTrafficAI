@@ -1,0 +1,169 @@
+{
+  "total_queries": 5,
+  "avg_latency_ms": 0.88,
+  "high_relevance_queries": 0,
+  "medium_relevance_queries": 5,
+  "low_relevance_queries": 0,
+  "query_results": [
+    {
+      "query_id": 1,
+      "query": "What are common causes of road accidents?",
+      "retrieved_chunks": 5,
+      "max_similarity": 0.0903,
+      "avg_similarity": 0.0436,
+      "relevance_assessment": "MEDIUM",
+      "latency_ms": 0.96,
+      "sources": [
+        {
+          "doc": "morth_road_safety_guidelines_2022",
+          "score": 0.0903
+        },
+        {
+          "doc": "irc_sp_88_road_safety_audit_manual",
+          "score": 0.0544
+        },
+        {
+          "doc": "maharashtra_motor_vehicles_rules_safety_summary",
+          "score": 0.0328
+        },
+        {
+          "doc": "maharashtra_motor_vehicles_rules_safety_summary",
+          "score": 0.0207
+        },
+        {
+          "doc": "morth_road_safety_guidelines_2022",
+          "score": 0.0196
+        }
+      ],
+      "context_preview": "[Source: morth_road_safety_guidelines_2022 | Relevance: 0.0903]\nvehicles (LMVs), 80 km/h for heavy commercial vehicles (HCVs). 4 lane divided National Highways: 100 km/h for LMVs, 80 km/h for HCVs. Undivided 2 lane State Highways: 70 km/h for LMVs, 60 km/h for HCVs. Urban arterial roads and school z..."
+    },
+    {
+      "query_id": 2,
+      "query": "What road-safety measures are recommended?",
+      "retrieved_chunks": 5,
+      "max_similarity": 0.095,
+      "avg_similarity": 0.0733,
+      "relevance_assessment": "MEDIUM",
+      "latency_ms": 1.09,
+      "sources": [
+        {
+          "doc": "irc_sp_88_road_safety_audit_manual",
+          "score": 0.095
+        },
+        {
+          "doc": "morth_road_safety_guidelines_2022",
+          "score": 0.0902
+        },
+        {
+          "doc": "maharashtra_motor_vehicles_rules_safety_summary",
+          "score": 0.08
+        },
+        {
+          "doc": "maharashtra_motor_vehicles_rules_safety_summary",
+          "score": 0.0553
+        },
+        {
+          "doc": "irc_sp_88_road_safety_audit_manual",
+          "score": 0.0461
+        }
+      ],
+      "context_preview": "[Source: irc_sp_88_road_safety_audit_manual | Relevance: 0.095]\nIRC SP:88 Road Safety Audit Manual — Summary Issuing Body: Indian Roads Congress (IRC) Document: IRC:SP:88 2019 \"Guidelines for Road Safety Audit\" Applicability: All national and state highways in India, including Maharashtra 1. Purpose..."
+    },
+    {
+      "query_id": 3,
+      "query": "What are major road-safety concerns in Maharashtra?",
+      "retrieved_chunks": 5,
+      "max_similarity": 0.1389,
+      "avg_similarity": 0.1111,
+      "relevance_assessment": "MEDIUM",
+      "latency_ms": 0.88,
+      "sources": [
+        {
+          "doc": "irc_sp_88_road_safety_audit_manual",
+          "score": 0.1389
+        },
+        {
+          "doc": "maharashtra_motor_vehicles_rules_safety_summary",
+          "score": 0.1382
+        },
+        {
+          "doc": "maharashtra_motor_vehicles_rules_safety_summary",
+          "score": 0.1107
+        },
+        {
+          "doc": "morth_road_safety_guidelines_2022",
+          "score": 0.0843
+        },
+        {
+          "doc": "irc_sp_88_road_safety_audit_manual",
+          "score": 0.0835
+        }
+      ],
+      "context_preview": "[Source: irc_sp_88_road_safety_audit_manual | Relevance: 0.1389]\nIRC SP:88 Road Safety Audit Manual — Summary Issuing Body: Indian Roads Congress (IRC) Document: IRC:SP:88 2019 \"Guidelines for Road Safety Audit\" Applicability: All national and state highways in India, including Maharashtra 1. Purpos..."
+    },
+    {
+      "query_id": 4,
+      "query": "What factors are associated with accident severity?",
+      "retrieved_chunks": 5,
+      "max_similarity": 0.1014,
+      "avg_similarity": 0.0441,
+      "relevance_assessment": "MEDIUM",
+      "latency_ms": 0.81,
+      "sources": [
+        {
+          "doc": "morth_road_safety_guidelines_2022",
+          "score": 0.1014
+        },
+        {
+          "doc": "irc_sp_88_road_safety_audit_manual",
+          "score": 0.0384
+        },
+        {
+          "doc": "irc_sp_88_road_safety_audit_manual",
+          "score": 0.0348
+        },
+        {
+          "doc": "maharashtra_motor_vehicles_rules_safety_summary",
+          "score": 0.0238
+        },
+        {
+          "doc": "maharashtra_motor_vehicles_rules_safety_summary",
+          "score": 0.0221
+        }
+      ],
+      "context_preview": "[Source: morth_road_safety_guidelines_2022 | Relevance: 0.1014]\nburst. Nashik Pune Highway (NH 60): Significant truck LMV collision corridor. Nagpur Amravati Yavatmal Corridor: High fatality rate among Vidarbha region roads due to unlit stretches. Satara Kolhapur (NH 48 South): Frequent accidents at..."
+    },
+    {
+      "query_id": 5,
+      "query": "What measures are recommended for improving road safety?",
+      "retrieved_chunks": 5,
+      "max_similarity": 0.095,
+      "avg_similarity": 0.0733,
+      "relevance_assessment": "MEDIUM",
+      "latency_ms": 0.66,
+      "sources": [
+        {
+          "doc": "irc_sp_88_road_safety_audit_manual",
+          "score": 0.095
+        },
+        {
+          "doc": "morth_road_safety_guidelines_2022",
+          "score": 0.0902
+        },
+        {
+          "doc": "maharashtra_motor_vehicles_rules_safety_summary",
+          "score": 0.08
+        },
+        {
+          "doc": "maharashtra_motor_vehicles_rules_safety_summary",
+          "score": 0.0553
+        },
+        {
+          "doc": "irc_sp_88_road_safety_audit_manual",
+          "score": 0.0461
+        }
+      ],
+      "context_preview": "[Source: irc_sp_88_road_safety_audit_manual | Relevance: 0.095]\nIRC SP:88 Road Safety Audit Manual — Summary Issuing Body: Indian Roads Congress (IRC) Document: IRC:SP:88 2019 \"Guidelines for Road Safety Audit\" Applicability: All national and state highways in India, including Maharashtra 1. Purpose..."
+    }
+  ]
+}

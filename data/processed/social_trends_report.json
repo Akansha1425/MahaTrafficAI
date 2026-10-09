@@ -1,0 +1,867 @@
+{
+  "total_posts": 1200,
+  "monthly_post_counts": [
+    {
+      "year": 2021,
+      "month": 1,
+      "post_count": 46,
+      "period": "2021-01"
+    },
+    {
+      "year": 2021,
+      "month": 2,
+      "post_count": 34,
+      "period": "2021-02"
+    },
+    {
+      "year": 2021,
+      "month": 3,
+      "post_count": 28,
+      "period": "2021-03"
+    },
+    {
+      "year": 2021,
+      "month": 4,
+      "post_count": 34,
+      "period": "2021-04"
+    },
+    {
+      "year": 2021,
+      "month": 5,
+      "post_count": 24,
+      "period": "2021-05"
+    },
+    {
+      "year": 2021,
+      "month": 6,
+      "post_count": 38,
+      "period": "2021-06"
+    },
+    {
+      "year": 2021,
+      "month": 7,
+      "post_count": 32,
+      "period": "2021-07"
+    },
+    {
+      "year": 2021,
+      "month": 8,
+      "post_count": 29,
+      "period": "2021-08"
+    },
+    {
+      "year": 2021,
+      "month": 9,
+      "post_count": 34,
+      "period": "2021-09"
+    },
+    {
+      "year": 2021,
+      "month": 10,
+      "post_count": 36,
+      "period": "2021-10"
+    },
+    {
+      "year": 2021,
+      "month": 11,
+      "post_count": 40,
+      "period": "2021-11"
+    },
+    {
+      "year": 2021,
+      "month": 12,
+      "post_count": 26,
+      "period": "2021-12"
+    },
+    {
+      "year": 2022,
+      "month": 1,
+      "post_count": 31,
+      "period": "2022-01"
+    },
+    {
+      "year": 2022,
+      "month": 2,
+      "post_count": 32,
+      "period": "2022-02"
+    },
+    {
+      "year": 2022,
+      "month": 3,
+      "post_count": 27,
+      "period": "2022-03"
+    },
+    {
+      "year": 2022,
+      "month": 4,
+      "post_count": 36,
+      "period": "2022-04"
+    },
+    {
+      "year": 2022,
+      "month": 5,
+      "post_count": 38,
+      "period": "2022-05"
+    },
+    {
+      "year": 2022,
+      "month": 6,
+      "post_count": 30,
+      "period": "2022-06"
+    },
+    {
+      "year": 2022,
+      "month": 7,
+      "post_count": 36,
+      "period": "2022-07"
+    },
+    {
+      "year": 2022,
+      "month": 8,
+      "post_count": 20,
+      "period": "2022-08"
+    },
+    {
+      "year": 2022,
+      "month": 9,
+      "post_count": 28,
+      "period": "2022-09"
+    },
+    {
+      "year": 2022,
+      "month": 10,
+      "post_count": 44,
+      "period": "2022-10"
+    },
+    {
+      "year": 2022,
+      "month": 11,
+      "post_count": 37,
+      "period": "2022-11"
+    },
+    {
+      "year": 2022,
+      "month": 12,
+      "post_count": 38,
+      "period": "2022-12"
+    },
+    {
+      "year": 2023,
+      "month": 1,
+      "post_count": 34,
+      "period": "2023-01"
+    },
+    {
+      "year": 2023,
+      "month": 2,
+      "post_count": 28,
+      "period": "2023-02"
+    },
+    {
+      "year": 2023,
+      "month": 3,
+      "post_count": 30,
+      "period": "2023-03"
+    },
+    {
+      "year": 2023,
+      "month": 4,
+      "post_count": 32,
+      "period": "2023-04"
+    },
+    {
+      "year": 2023,
+      "month": 5,
+      "post_count": 41,
+      "period": "2023-05"
+    },
+    {
+      "year": 2023,
+      "month": 6,
+      "post_count": 34,
+      "period": "2023-06"
+    },
+    {
+      "year": 2023,
+      "month": 7,
+      "post_count": 31,
+      "period": "2023-07"
+    },
+    {
+      "year": 2023,
+      "month": 8,
+      "post_count": 30,
+      "period": "2023-08"
+    },
+    {
+      "year": 2023,
+      "month": 9,
+      "post_count": 45,
+      "period": "2023-09"
+    },
+    {
+      "year": 2023,
+      "month": 10,
+      "post_count": 25,
+      "period": "2023-10"
+    },
+    {
+      "year": 2023,
+      "month": 11,
+      "post_count": 24,
+      "period": "2023-11"
+    },
+    {
+      "year": 2023,
+      "month": 12,
+      "post_count": 48,
+      "period": "2023-12"
+    }
+  ],
+  "monthly_negative_sentiment": [
+    {
+      "year": 2021,
+      "month": 1,
+      "total": 46,
+      "negative": 36,
+      "negative_pct": 78.26,
+      "period": "2021-01"
+    },
+    {
+      "year": 2021,
+      "month": 2,
+      "total": 34,
+      "negative": 27,
+      "negative_pct": 79.41,
+      "period": "2021-02"
+    },
+    {
+      "year": 2021,
+      "month": 3,
+      "total": 28,
+      "negative": 21,
+      "negative_pct": 75.0,
+      "period": "2021-03"
+    },
+    {
+      "year": 2021,
+      "month": 4,
+      "total": 34,
+      "negative": 27,
+      "negative_pct": 79.41,
+      "period": "2021-04"
+    },
+    {
+      "year": 2021,
+      "month": 5,
+      "total": 24,
+      "negative": 17,
+      "negative_pct": 70.83,
+      "period": "2021-05"
+    },
+    {
+      "year": 2021,
+      "month": 6,
+      "total": 38,
+      "negative": 31,
+      "negative_pct": 81.58,
+      "period": "2021-06"
+    },
+    {
+      "year": 2021,
+      "month": 7,
+      "total": 32,
+      "negative": 25,
+      "negative_pct": 78.12,
+      "period": "2021-07"
+    },
+    {
+      "year": 2021,
+      "month": 8,
+      "total": 29,
+      "negative": 24,
+      "negative_pct": 82.76,
+      "period": "2021-08"
+    },
+    {
+      "year": 2021,
+      "month": 9,
+      "total": 34,
+      "negative": 31,
+      "negative_pct": 91.18,
+      "period": "2021-09"
+    },
+    {
+      "year": 2021,
+      "month": 10,
+      "total": 36,
+      "negative": 26,
+      "negative_pct": 72.22,
+      "period": "2021-10"
+    },
+    {
+      "year": 2021,
+      "month": 11,
+      "total": 40,
+      "negative": 35,
+      "negative_pct": 87.5,
+      "period": "2021-11"
+    },
+    {
+      "year": 2021,
+      "month": 12,
+      "total": 26,
+      "negative": 18,
+      "negative_pct": 69.23,
+      "period": "2021-12"
+    },
+    {
+      "year": 2022,
+      "month": 1,
+      "total": 31,
+      "negative": 23,
+      "negative_pct": 74.19,
+      "period": "2022-01"
+    },
+    {
+      "year": 2022,
+      "month": 2,
+      "total": 32,
+      "negative": 22,
+      "negative_pct": 68.75,
+      "period": "2022-02"
+    },
+    {
+      "year": 2022,
+      "month": 3,
+      "total": 27,
+      "negative": 21,
+      "negative_pct": 77.78,
+      "period": "2022-03"
+    },
+    {
+      "year": 2022,
+      "month": 4,
+      "total": 36,
+      "negative": 31,
+      "negative_pct": 86.11,
+      "period": "2022-04"
+    },
+    {
+      "year": 2022,
+      "month": 5,
+      "total": 38,
+      "negative": 30,
+      "negative_pct": 78.95,
+      "period": "2022-05"
+    },
+    {
+      "year": 2022,
+      "month": 6,
+      "total": 30,
+      "negative": 21,
+      "negative_pct": 70.0,
+      "period": "2022-06"
+    },
+    {
+      "year": 2022,
+      "month": 7,
+      "total": 36,
+      "negative": 27,
+      "negative_pct": 75.0,
+      "period": "2022-07"
+    },
+    {
+      "year": 2022,
+      "month": 8,
+      "total": 20,
+      "negative": 16,
+      "negative_pct": 80.0,
+      "period": "2022-08"
+    },
+    {
+      "year": 2022,
+      "month": 9,
+      "total": 28,
+      "negative": 25,
+      "negative_pct": 89.29,
+      "period": "2022-09"
+    },
+    {
+      "year": 2022,
+      "month": 10,
+      "total": 44,
+      "negative": 41,
+      "negative_pct": 93.18,
+      "period": "2022-10"
+    },
+    {
+      "year": 2022,
+      "month": 11,
+      "total": 37,
+      "negative": 32,
+      "negative_pct": 86.49,
+      "period": "2022-11"
+    },
+    {
+      "year": 2022,
+      "month": 12,
+      "total": 38,
+      "negative": 31,
+      "negative_pct": 81.58,
+      "period": "2022-12"
+    },
+    {
+      "year": 2023,
+      "month": 1,
+      "total": 34,
+      "negative": 27,
+      "negative_pct": 79.41,
+      "period": "2023-01"
+    },
+    {
+      "year": 2023,
+      "month": 2,
+      "total": 28,
+      "negative": 24,
+      "negative_pct": 85.71,
+      "period": "2023-02"
+    },
+    {
+      "year": 2023,
+      "month": 3,
+      "total": 30,
+      "negative": 24,
+      "negative_pct": 80.0,
+      "period": "2023-03"
+    },
+    {
+      "year": 2023,
+      "month": 4,
+      "total": 32,
+      "negative": 25,
+      "negative_pct": 78.12,
+      "period": "2023-04"
+    },
+    {
+      "year": 2023,
+      "month": 5,
+      "total": 41,
+      "negative": 36,
+      "negative_pct": 87.8,
+      "period": "2023-05"
+    },
+    {
+      "year": 2023,
+      "month": 6,
+      "total": 34,
+      "negative": 30,
+      "negative_pct": 88.24,
+      "period": "2023-06"
+    },
+    {
+      "year": 2023,
+      "month": 7,
+      "total": 31,
+      "negative": 23,
+      "negative_pct": 74.19,
+      "period": "2023-07"
+    },
+    {
+      "year": 2023,
+      "month": 8,
+      "total": 30,
+      "negative": 30,
+      "negative_pct": 100.0,
+      "period": "2023-08"
+    },
+    {
+      "year": 2023,
+      "month": 9,
+      "total": 45,
+      "negative": 36,
+      "negative_pct": 80.0,
+      "period": "2023-09"
+    },
+    {
+      "year": 2023,
+      "month": 10,
+      "total": 25,
+      "negative": 20,
+      "negative_pct": 80.0,
+      "period": "2023-10"
+    },
+    {
+      "year": 2023,
+      "month": 11,
+      "total": 24,
+      "negative": 18,
+      "negative_pct": 75.0,
+      "period": "2023-11"
+    },
+    {
+      "year": 2023,
+      "month": 12,
+      "total": 48,
+      "negative": 37,
+      "negative_pct": 77.08,
+      "period": "2023-12"
+    }
+  ],
+  "top_complaint_topics": [
+    {
+      "topic": "accident_report",
+      "count": 507
+    },
+    {
+      "topic": "potholes",
+      "count": 386
+    },
+    {
+      "topic": "speeding",
+      "count": 230
+    },
+    {
+      "topic": "dangerous_intersections",
+      "count": 210
+    },
+    {
+      "topic": "poor_lighting",
+      "count": 119
+    },
+    {
+      "topic": "pedestrian_safety",
+      "count": 114
+    },
+    {
+      "topic": "signal_problems",
+      "count": 110
+    },
+    {
+      "topic": "poor_road_conditions",
+      "count": 100
+    }
+  ],
+  "location_complaint_frequency": [
+    {
+      "location": "Pune",
+      "post_count": 276,
+      "negative_count": 225,
+      "avg_sentiment": -0.7681
+    },
+    {
+      "location": "Mumbai",
+      "post_count": 234,
+      "negative_count": 187,
+      "avg_sentiment": -0.765
+    },
+    {
+      "location": "Thane",
+      "post_count": 149,
+      "negative_count": 123,
+      "avg_sentiment": -0.7768
+    },
+    {
+      "location": "Nagpur",
+      "post_count": 122,
+      "negative_count": 97,
+      "avg_sentiment": -0.7541
+    },
+    {
+      "location": "Nashik",
+      "post_count": 120,
+      "negative_count": 93,
+      "avg_sentiment": -0.7167
+    },
+    {
+      "location": "Chhatrapati Sambhajinagar",
+      "post_count": 69,
+      "negative_count": 54,
+      "avg_sentiment": -0.7246
+    },
+    {
+      "location": "Solapur",
+      "post_count": 61,
+      "negative_count": 52,
+      "avg_sentiment": -0.8074
+    },
+    {
+      "location": "Kolhapur",
+      "post_count": 52,
+      "negative_count": 42,
+      "avg_sentiment": -0.7548
+    },
+    {
+      "location": "Navi Mumbai",
+      "post_count": 40,
+      "negative_count": 29,
+      "avg_sentiment": -0.675
+    },
+    {
+      "location": "Ahmednagar",
+      "post_count": 39,
+      "negative_count": 34,
+      "avg_sentiment": -0.8205
+    },
+    {
+      "location": "Satara",
+      "post_count": 38,
+      "negative_count": 32,
+      "avg_sentiment": -0.8092
+    }
+  ],
+  "engagement_trends": [
+    {
+      "year": 2021,
+      "month": 1,
+      "avg_engagement": 38.87,
+      "total_engagement": 1788,
+      "period": "2021-01"
+    },
+    {
+      "year": 2021,
+      "month": 2,
+      "avg_engagement": 36.53,
+      "total_engagement": 1242,
+      "period": "2021-02"
+    },
+    {
+      "year": 2021,
+      "month": 3,
+      "avg_engagement": 37.39,
+      "total_engagement": 1047,
+      "period": "2021-03"
+    },
+    {
+      "year": 2021,
+      "month": 4,
+      "avg_engagement": 44.62,
+      "total_engagement": 1517,
+      "period": "2021-04"
+    },
+    {
+      "year": 2021,
+      "month": 5,
+      "avg_engagement": 37.83,
+      "total_engagement": 908,
+      "period": "2021-05"
+    },
+    {
+      "year": 2021,
+      "month": 6,
+      "avg_engagement": 36.97,
+      "total_engagement": 1405,
+      "period": "2021-06"
+    },
+    {
+      "year": 2021,
+      "month": 7,
+      "avg_engagement": 43.53,
+      "total_engagement": 1393,
+      "period": "2021-07"
+    },
+    {
+      "year": 2021,
+      "month": 8,
+      "avg_engagement": 33.41,
+      "total_engagement": 969,
+      "period": "2021-08"
+    },
+    {
+      "year": 2021,
+      "month": 9,
+      "avg_engagement": 40.91,
+      "total_engagement": 1391,
+      "period": "2021-09"
+    },
+    {
+      "year": 2021,
+      "month": 10,
+      "avg_engagement": 36.89,
+      "total_engagement": 1328,
+      "period": "2021-10"
+    },
+    {
+      "year": 2021,
+      "month": 11,
+      "avg_engagement": 45.62,
+      "total_engagement": 1825,
+      "period": "2021-11"
+    },
+    {
+      "year": 2021,
+      "month": 12,
+      "avg_engagement": 42.23,
+      "total_engagement": 1098,
+      "period": "2021-12"
+    },
+    {
+      "year": 2022,
+      "month": 1,
+      "avg_engagement": 37.77,
+      "total_engagement": 1171,
+      "period": "2022-01"
+    },
+    {
+      "year": 2022,
+      "month": 2,
+      "avg_engagement": 39.34,
+      "total_engagement": 1259,
+      "period": "2022-02"
+    },
+    {
+      "year": 2022,
+      "month": 3,
+      "avg_engagement": 33.26,
+      "total_engagement": 898,
+      "period": "2022-03"
+    },
+    {
+      "year": 2022,
+      "month": 4,
+      "avg_engagement": 44.86,
+      "total_engagement": 1615,
+      "period": "2022-04"
+    },
+    {
+      "year": 2022,
+      "month": 5,
+      "avg_engagement": 39.84,
+      "total_engagement": 1514,
+      "period": "2022-05"
+    },
+    {
+      "year": 2022,
+      "month": 6,
+      "avg_engagement": 49.03,
+      "total_engagement": 1471,
+      "period": "2022-06"
+    },
+    {
+      "year": 2022,
+      "month": 7,
+      "avg_engagement": 41.03,
+      "total_engagement": 1477,
+      "period": "2022-07"
+    },
+    {
+      "year": 2022,
+      "month": 8,
+      "avg_engagement": 36.3,
+      "total_engagement": 726,
+      "period": "2022-08"
+    },
+    {
+      "year": 2022,
+      "month": 9,
+      "avg_engagement": 37.04,
+      "total_engagement": 1037,
+      "period": "2022-09"
+    },
+    {
+      "year": 2022,
+      "month": 10,
+      "avg_engagement": 37.16,
+      "total_engagement": 1635,
+      "period": "2022-10"
+    },
+    {
+      "year": 2022,
+      "month": 11,
+      "avg_engagement": 38.68,
+      "total_engagement": 1431,
+      "period": "2022-11"
+    },
+    {
+      "year": 2022,
+      "month": 12,
+      "avg_engagement": 36.92,
+      "total_engagement": 1403,
+      "period": "2022-12"
+    },
+    {
+      "year": 2023,
+      "month": 1,
+      "avg_engagement": 43.85,
+      "total_engagement": 1491,
+      "period": "2023-01"
+    },
+    {
+      "year": 2023,
+      "month": 2,
+      "avg_engagement": 44.21,
+      "total_engagement": 1238,
+      "period": "2023-02"
+    },
+    {
+      "year": 2023,
+      "month": 3,
+      "avg_engagement": 45.03,
+      "total_engagement": 1351,
+      "period": "2023-03"
+    },
+    {
+      "year": 2023,
+      "month": 4,
+      "avg_engagement": 48.34,
+      "total_engagement": 1547,
+      "period": "2023-04"
+    },
+    {
+      "year": 2023,
+      "month": 5,
+      "avg_engagement": 45.73,
+      "total_engagement": 1875,
+      "period": "2023-05"
+    },
+    {
+      "year": 2023,
+      "month": 6,
+      "avg_engagement": 34.53,
+      "total_engagement": 1174,
+      "period": "2023-06"
+    },
+    {
+      "year": 2023,
+      "month": 7,
+      "avg_engagement": 39.71,
+      "total_engagement": 1231,
+      "period": "2023-07"
+    },
+    {
+      "year": 2023,
+      "month": 8,
+      "avg_engagement": 41.97,
+      "total_engagement": 1259,
+      "period": "2023-08"
+    },
+    {
+      "year": 2023,
+      "month": 9,
+      "avg_engagement": 39.38,
+      "total_engagement": 1772,
+      "period": "2023-09"
+    },
+    {
+      "year": 2023,
+      "month": 10,
+      "avg_engagement": 38.48,
+      "total_engagement": 962,
+      "period": "2023-10"
+    },
+    {
+      "year": 2023,
+      "month": 11,
+      "avg_engagement": 38.79,
+      "total_engagement": 931,
+      "period": "2023-11"
+    },
+    {
+      "year": 2023,
+      "month": 12,
+      "avg_engagement": 41.79,
+      "total_engagement": 2006,
+      "period": "2023-12"
+    }
+  ]
+}
