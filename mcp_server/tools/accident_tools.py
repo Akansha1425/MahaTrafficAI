@@ -36,6 +36,7 @@ def get_city_accident_statistics(city_name: str, year: Optional[int] = None) -> 
         "city_name": city_name,
         "district_found": True,
         "year": year,
+        "records_count": stats.get("records_count", 0),
         "total_accidents": stats.get("total_accidents", 0),
         "total_deaths": stats.get("total_deaths", 0),
         "total_injuries": stats.get("total_injuries", 0),

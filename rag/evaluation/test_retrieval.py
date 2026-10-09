@@ -17,15 +17,19 @@ from the actual corpus are reported.
 """
 
 from __future__ import annotations
+import sys
+from pathlib import Path
 import json
 import logging
 import time
-from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+if str(BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(BASE_DIR))
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger("rag.evaluation")
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
 REPORT_PATH = BASE_DIR / "data" / "processed" / "rag_retrieval_report.json"
 
 TEST_QUERIES = [

@@ -68,6 +68,7 @@ def get_accident_statistics(
         by_year = df.groupby("year")["accident_count"].sum().to_dict()
 
         return {
+            "records_count": len(df),
             "total_accidents": int(df["accident_count"].sum()),
             "total_deaths": int(df["deaths"].sum()),
             "total_injuries": int(df["injuries"].sum()),

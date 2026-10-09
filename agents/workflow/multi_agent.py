@@ -167,8 +167,9 @@ class AnalyticsAgent:
             d = resp1.data
             data_payload["city_stats"] = d
             if d.get("district_found"):
+                rec_cnt = d.get('records_count', 0)
                 summary_lines.append(
-                    f"District '{d.get('city_name')}': {d.get('total_accidents', 0):,} total accidents, "
+                    f"District '{d.get('city_name')}': {rec_cnt:,} historical records, {d.get('total_accidents', 0):,} total accidents, "
                     f"{d.get('total_deaths', 0):,} deaths, and {d.get('total_injuries', 0):,} injuries (2019-2023)."
                 )
                 if d.get("top_causes"):
